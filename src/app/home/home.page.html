@@ -1,12 +1,24 @@
-<ion-header>
-  <ion-toolbar>
+<ion-header no-border>
+  <ion-toolbar color="secondary">
     <ion-title>
-      Ionic Blank
+      Quiz App
     </ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content padding>
-  The world is your oyster.
-  <p>If you get lost, the <a target="_blank" rel="noopener" href="https://ionicframework.com/docs">docs</a> will be your guide.</p>
+<ion-content text-center>
+  <ion-card (click)="showCards(deck)" *ngFor="let deck of decks">
+    <ion-card-header>
+      <ion-card-title>{{ deck.name }}</ion-card-title>
+    </ion-card-header>
+  </ion-card>
 </ion-content>
+
+<ion-footer no-border>
+  <ion-toolbar color="secondary" text-center>
+    <ion-button fill="outline" color="light" (click)="startQuiz()">
+      Quiz Me
+      <ion-icon slot="end" name="albums"></ion-icon>
+    </ion-button>
+  </ion-toolbar>
+</ion-footer>

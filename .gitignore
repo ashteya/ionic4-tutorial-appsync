@@ -32,3 +32,8 @@ $RECYCLE.BIN/
 .DS_Store
 Thumbs.db
 UserInterfaceState.xcuserstate
+
+amplify
+aws-exports.js
+.graphqlconfig.yml
+.amplifyrc

@@ -1,0 +1,31 @@
+<ion-header no-border>
+  <ion-toolbar color="secondary">
+    <ion-buttons slot="start">
+      <ion-button (click)="delete()">
+        <ion-icon slot="icon-only" name="trash"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>Card</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="save()">
+        <ion-icon slot="icon-only" name="checkmark-circle-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-card padding>
+    <ion-item>
+      <ion-label position="stacked">Question</ion-label>
+      <ion-textarea rows="5" [(ngModel)]="card.question"></ion-textarea>
+    </ion-item>
+  </ion-card>
+
+  <ion-card padding>
+    <ion-item>
+      <ion-label position="stacked">Answer</ion-label>
+      <ion-textarea rows="10" [(ngModel)]="card.answer"></ion-textarea>
+    </ion-item>
+  </ion-card>
+</ion-content>
