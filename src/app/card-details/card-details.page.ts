@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ModalController, NavParams } from '@ionic/angular';
 import { API, graphqlOperation } from "aws-amplify";
+import { APIService } from '../api.service';
 
 const getAnswer = `
 query getAnswer($id: ID!) {
@@ -22,17 +23,20 @@ export class CardDetailsPage implements OnInit {
   public isNew = false;
 
   constructor(private modalController: ModalController,
-              private navParams: NavParams)  { }
+              private navParams: NavParams,
+              private apiService: APIService)  { }
 
   ngOnInit() {
-    this.card = this.navParams.get('card');
     this.deck = this.navParams.get('deck');
-
-    if (!this.card) {
+    const card = this.navParams.get('card');
+    
+    if (!card) {
       this.isNew = true;
-      this.card = { question: '', answer: '' };
+      this.card = {};
     }
     else {
+      this.card = Object.assign({}, card);
+
       const query = API.graphql(graphqlOperation(getAnswer, { id: this.card.id })) as Promise<any>;
 
       query.then(res => {
@@ -42,10 +46,31 @@ export class CardDetailsPage implements OnInit {
   }
 
   delete() {
+    if (!this.isNew) {
+      this.apiService.DeleteCard({
+        id: this.card.id
+      });
+    }
+
     this.modalController.dismiss();
   }
   
   save() {
+    if (this.isNew) {
+      this.apiService.CreateCard({
+        cardDeckId: this.deck.id,
+        question: this.card.question,
+        answer: this.card.answer
+      })
+    } 
+    else {
+      this.apiService.UpdateCard({
+        id: this.card.id,
+        question: this.card.question,
+        answer: this.card.answer
+      })
+    }
+
     this.modalController.dismiss();
   }
 }

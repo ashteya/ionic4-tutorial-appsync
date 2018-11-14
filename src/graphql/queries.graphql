@@ -1,7 +1,5 @@
-// tslint:disable
-// this is an auto generated file. This will be overwritten
-
-export const getDeck = `query GetDeck($id: ID!) {
+# this is an auto generated file. This will be overwritten
+query GetDeck($id: ID!) {
   getDeck(id: $id) {
     id
     name
@@ -15,8 +13,7 @@ export const getDeck = `query GetDeck($id: ID!) {
     }
   }
 }
-`;
-export const listDecks = `query ListDecks(
+query ListDecks(
   $filter: ModelDeckFilterInput
   $limit: Int
   $nextToken: String
@@ -37,8 +34,7 @@ export const listDecks = `query ListDecks(
     nextToken
   }
 }
-`;
-export const getCard = `query GetCard($id: ID!) {
+query GetCard($id: ID!) {
   getCard(id: $id) {
     id
     question
@@ -49,8 +45,7 @@ export const getCard = `query GetCard($id: ID!) {
     }
   }
 }
-`;
-export const listCards = `query ListCards(
+query ListCards(
   $filter: ModelCardFilterInput
   $limit: Int
   $nextToken: String
@@ -68,4 +63,3 @@ export const listCards = `query ListCards(
     nextToken
   }
 }
-`;

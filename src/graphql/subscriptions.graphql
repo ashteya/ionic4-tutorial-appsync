@@ -1,7 +1,5 @@
-// tslint:disable
-// this is an auto generated file. This will be overwritten
-
-export const onCreateDeck = `subscription OnCreateDeck {
+# this is an auto generated file. This will be overwritten
+subscription OnCreateDeck {
   onCreateDeck {
     id
     name
@@ -15,8 +13,7 @@ export const onCreateDeck = `subscription OnCreateDeck {
     }
   }
 }
-`;
-export const onUpdateDeck = `subscription OnUpdateDeck {
+subscription OnUpdateDeck {
   onUpdateDeck {
     id
     name
@@ -30,8 +27,7 @@ export const onUpdateDeck = `subscription OnUpdateDeck {
     }
   }
 }
-`;
-export const onDeleteDeck = `subscription OnDeleteDeck {
+subscription OnDeleteDeck {
   onDeleteDeck {
     id
     name
@@ -45,8 +41,7 @@ export const onDeleteDeck = `subscription OnDeleteDeck {
     }
   }
 }
-`;
-export const onCreateCard = `subscription OnCreateCard {
+subscription OnCreateCard {
   onCreateCard {
     id
     question
@@ -57,8 +52,7 @@ export const onCreateCard = `subscription OnCreateCard {
     }
   }
 }
-`;
-export const onUpdateCard = `subscription OnUpdateCard {
+subscription OnUpdateCard {
   onUpdateCard {
     id
     question
@@ -69,8 +63,7 @@ export const onUpdateCard = `subscription OnUpdateCard {
     }
   }
 }
-`;
-export const onDeleteCard = `subscription OnDeleteCard {
+subscription OnDeleteCard {
   onDeleteCard {
     id
     question
@@ -81,4 +74,3 @@ export const onDeleteCard = `subscription OnDeleteCard {
     }
   }
 }
-`;

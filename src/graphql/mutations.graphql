@@ -1,7 +1,5 @@
-// tslint:disable
-// this is an auto generated file. This will be overwritten
-
-export const createDeck = `mutation CreateDeck($input: CreateDeckInput!) {
+# this is an auto generated file. This will be overwritten
+mutation CreateDeck($input: CreateDeckInput!) {
   createDeck(input: $input) {
     id
     name
@@ -15,8 +13,7 @@ export const createDeck = `mutation CreateDeck($input: CreateDeckInput!) {
     }
   }
 }
-`;
-export const updateDeck = `mutation UpdateDeck($input: UpdateDeckInput!) {
+mutation UpdateDeck($input: UpdateDeckInput!) {
   updateDeck(input: $input) {
     id
     name
@@ -30,8 +27,7 @@ export const updateDeck = `mutation UpdateDeck($input: UpdateDeckInput!) {
     }
   }
 }
-`;
-export const deleteDeck = `mutation DeleteDeck($input: DeleteDeckInput!) {
+mutation DeleteDeck($input: DeleteDeckInput!) {
   deleteDeck(input: $input) {
     id
     name
@@ -45,8 +41,7 @@ export const deleteDeck = `mutation DeleteDeck($input: DeleteDeckInput!) {
     }
   }
 }
-`;
-export const createCard = `mutation CreateCard($input: CreateCardInput!) {
+mutation CreateCard($input: CreateCardInput!) {
   createCard(input: $input) {
     id
     question
@@ -57,8 +52,7 @@ export const createCard = `mutation CreateCard($input: CreateCardInput!) {
     }
   }
 }
-`;
-export const updateCard = `mutation UpdateCard($input: UpdateCardInput!) {
+mutation UpdateCard($input: UpdateCardInput!) {
   updateCard(input: $input) {
     id
     question
@@ -69,8 +63,7 @@ export const updateCard = `mutation UpdateCard($input: UpdateCardInput!) {
     }
   }
 }
-`;
-export const deleteCard = `mutation DeleteCard($input: DeleteCardInput!) {
+mutation DeleteCard($input: DeleteCardInput!) {
   deleteCard(input: $input) {
     id
     question
@@ -81,4 +74,3 @@ export const deleteCard = `mutation DeleteCard($input: DeleteCardInput!) {
     }
   }
 }
-`;

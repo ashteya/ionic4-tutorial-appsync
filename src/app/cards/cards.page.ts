@@ -25,6 +25,7 @@ query listQuestions($id: ID!) {
 })
 export class CardsPage implements OnInit {
 
+  public deckId;
   public deck;
 
   constructor(private modalController: ModalController,
@@ -32,13 +33,18 @@ export class CardsPage implements OnInit {
   }
 
   ngOnInit() {
-    this.route.params.subscribe(p => {
-      const query = API.graphql(graphqlOperation(listQuestions, { id: p.id })) as Promise<any>;
+    this.route.params.subscribe(p => { 
+      this.deckId = p.id;
+      this.getQuestions();
+    });
+  }
 
-      query.then(res => {
-        this.deck = res.data.getDeck;
-      });
-   })
+  getQuestions() {
+    const query = API.graphql(graphqlOperation(listQuestions, { id: this.deckId })) as Promise<any>;
+
+    query.then(res => {
+      this.deck = res.data.getDeck;
+    });
   }
 
   async showCard(card) {
@@ -54,9 +60,12 @@ export class CardsPage implements OnInit {
       component: CardDetailsPage,
       componentProps: { 
         card: card,
-        deck: { id: this.deck.id, name: this.deck.name }
+        deck: { id: this.deckId }
       }
     });
+
+    modal.onDidDismiss().then(() => this.getQuestions());
+
     return await modal.present();
   }
 }

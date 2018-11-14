@@ -1,9 +1,24 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>quiz</ion-title>
+<ion-header no-border>
+  <ion-toolbar color="secondary">
+    <ion-buttons slot="start">
+      <ion-button (click)="stop()">
+        <ion-icon slot="icon-only" name="close"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title class="swiper-pagination"></ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content padding>
-
+<ion-content>
+  <ion-slides [options]="slideOptions">
+    <ion-slide *ngFor="let card of cards">
+      <ion-card padding>
+        <p class="question">{{ card.question }}</p>
+        <ion-button color="secondary" (click)="showAnswer(card)" *ngIf="!card.displayAnswer">Answer</ion-button>
+        <p class="answer" *ngIf="card.displayAnswer">
+          {{ card.answer }}
+        </p>
+      </ion-card>
+    </ion-slide>
+  </ion-slides>
 </ion-content>
