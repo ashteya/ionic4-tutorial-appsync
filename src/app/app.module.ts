@@ -13,15 +13,25 @@ import { QuizPage } from './quiz/quiz.page';
 import { QuizPageModule } from './quiz/quiz.module';
 import { CardDetailsPage } from './card-details/card-details.page';
 import { CardDetailsPageModule } from './card-details/card-details.module';
+import { AmplifyAngularModule, AmplifyIonicModule, AmplifyService } from 'aws-amplify-angular'
 
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [QuizPage, CardDetailsPage],
-  imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule, QuizPageModule, CardDetailsPageModule],
+  imports: [
+    BrowserModule, 
+    IonicModule.forRoot(), 
+    AppRoutingModule, 
+    QuizPageModule, 
+    CardDetailsPageModule,
+    AmplifyAngularModule,
+    AmplifyIonicModule
+  ],
   providers: [
     StatusBar,
     SplashScreen,
-    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
+    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
+    AmplifyService
   ],
   bootstrap: [AppComponent]
 })

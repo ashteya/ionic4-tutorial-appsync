@@ -1,0 +1,18 @@
+<ion-header no-border>
+  <ion-toolbar color="secondary">
+    <ion-title>Quiz App</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+	<amplify-authenticator framework="ionic"></amplify-authenticator>
+</ion-content>
+
+<ion-footer no-border *ngIf="this.authState.signedIn">
+  <ion-toolbar color="secondary" text-center>
+    <ion-button fill="outline" color="light" (click)="showDecks()">
+        My Decks
+      <ion-icon slot="end" name="albums"></ion-icon>
+    </ion-button>
+  </ion-toolbar>
+</ion-footer>
