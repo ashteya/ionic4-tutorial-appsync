@@ -63,3 +63,27 @@ query ListCards(
     nextToken
   }
 }
+query SearchCards(
+  $filter: SearchableCardFilterInput
+  $sort: SearchableCardSortInput
+  $limit: Int
+  $nextToken: Int
+) {
+  searchCards(
+    filter: $filter
+    sort: $sort
+    limit: $limit
+    nextToken: $nextToken
+  ) {
+    items {
+      id
+      question
+      answer
+      deck {
+        id
+        name
+      }
+    }
+    nextToken
+  }
+}

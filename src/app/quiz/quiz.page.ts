@@ -1,5 +1,5 @@
 import { Component, OnInit } from "@angular/core";
-import { ModalController } from "@ionic/angular";
+import { ModalController, NavParams } from "@ionic/angular";
 import { APIService } from "../api.service";
 
 @Component({
@@ -24,14 +24,15 @@ export class QuizPage implements OnInit {
 
   constructor(
     public modalController: ModalController,
+    private navParams: NavParams,
     public apiService: APIService
   ) { }
 
   ngOnInit() {
     this.apiService
-      .ListCards({
+      .SearchCards({
         question: {
-          contains: 'GraphQL'
+          match: this.navParams.get('filter')
         }
       })
       .then(query => this.cards = query.items);

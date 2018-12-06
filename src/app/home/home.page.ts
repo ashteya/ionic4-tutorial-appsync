@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { ModalController } from '@ionic/angular';
+import { ModalController, AlertController } from '@ionic/angular';
 import { Router } from '@angular/router';
 import { QuizPage } from '../quiz/quiz.page';
 
@@ -26,7 +26,8 @@ export class HomePage {
   public decks;
 
   constructor(private modalController: ModalController,
-              private router: Router) {
+              private router: Router,
+              private alertController: AlertController) {
   }
 
   ngOnInit() {
@@ -41,10 +42,43 @@ export class HomePage {
     this.router.navigate(['/cards', deck.id]);
   }
 
-  async startQuiz() {
-      const modal = await this.modalController.create({
-        component: QuizPage
-      });
-      return await modal.present();
+  async promptQuiz() {
+    const alert = await this.alertController.create({
+      header: 'Which cards?',
+      inputs: [
+        {
+          name: 'filter',
+          type: 'text',
+          placeholder: 'Type a word to filter the cards'
+        }
+      ],
+      buttons: [
+        {
+          text: 'Cancel',
+          role: 'cancel',
+          cssClass: 'secondary',
+          handler: () => {
+            console.log('Confirm Cancel');
+          }
+        }, 
+        {
+          text: 'Start Quiz',
+          handler: async data => {
+            console.log(data.filter);
+            await this.startQuiz(data.filter);
+          }
+        }
+      ]
+    });
+
+    await alert.present();
+  }
+
+  async startQuiz(filter) {
+    const modal = await this.modalController.create({
+      component: QuizPage,
+      componentProps: { filter }
+    });
+    return await modal.present();
   }
 }

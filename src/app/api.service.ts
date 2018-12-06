@@ -80,6 +80,55 @@ export type ModelCardFilterInput = {
   not?: ModelCardFilterInput | null;
 };
 
+export type SearchableCardFilterInput = {
+  id?: SearchableIDFilterInput | null;
+  question?: SearchableStringFilterInput | null;
+  answer?: SearchableStringFilterInput | null;
+  and?: Array<SearchableCardFilterInput | null> | null;
+  or?: Array<SearchableCardFilterInput | null> | null;
+  not?: SearchableCardFilterInput | null;
+};
+
+export type SearchableIDFilterInput = {
+  ne?: string | null;
+  eq?: string | null;
+  match?: string | null;
+  matchPhrase?: string | null;
+  matchPhrasePrefix?: string | null;
+  multiMatch?: string | null;
+  exists?: boolean | null;
+  wildcard?: string | null;
+  regexp?: string | null;
+};
+
+export type SearchableStringFilterInput = {
+  ne?: string | null;
+  eq?: string | null;
+  match?: string | null;
+  matchPhrase?: string | null;
+  matchPhrasePrefix?: string | null;
+  multiMatch?: string | null;
+  exists?: boolean | null;
+  wildcard?: string | null;
+  regexp?: string | null;
+};
+
+export type SearchableCardSortInput = {
+  field?: SearchableCardSortableFields | null;
+  direction?: SearchableSortDirection | null;
+};
+
+export enum SearchableCardSortableFields {
+  id = "id",
+  question = "question",
+  answer = "answer"
+}
+
+export enum SearchableSortDirection {
+  asc = "asc",
+  desc = "desc"
+}
+
 export type CreateDeckMutation = {
   id: string;
   name: string;
@@ -189,6 +238,19 @@ export type GetCardQuery = {
 };
 
 export type ListCardsQuery = {
+  items: Array<{
+    id: string;
+    question: string;
+    answer: string | null;
+    deck: {
+      id: string;
+      name: string;
+    };
+  } | null> | null;
+  nextToken: string | null;
+};
+
+export type SearchCardsQuery = {
   items: Array<{
     id: string;
     question: string;
@@ -516,6 +578,44 @@ export class APIService {
       graphqlOperation(statement, gqlAPIServiceArguments)
     )) as any;
     return <ListCardsQuery>response.data.listCards;
+  }
+  async SearchCards(
+    filter?: SearchableCardFilterInput,
+    sort?: SearchableCardSortInput,
+    limit?: number,
+    nextToken?: number
+  ): Promise<SearchCardsQuery> {
+    const statement = `query SearchCards($filter: SearchableCardFilterInput, $sort: SearchableCardSortInput, $limit: Int, $nextToken: Int) {
+        searchCards(filter: $filter, sort: $sort, limit: $limit, nextToken: $nextToken) {
+          items {
+            id
+            question
+            answer
+            deck {
+              id
+              name
+            }
+          }
+          nextToken
+        }
+      }`;
+    const gqlAPIServiceArguments: any = {};
+    if (filter) {
+      gqlAPIServiceArguments.filter = filter;
+    }
+    if (sort) {
+      gqlAPIServiceArguments.sort = sort;
+    }
+    if (limit) {
+      gqlAPIServiceArguments.limit = limit;
+    }
+    if (nextToken) {
+      gqlAPIServiceArguments.nextToken = nextToken;
+    }
+    const response = (await API.graphql(
+      graphqlOperation(statement, gqlAPIServiceArguments)
+    )) as any;
+    return <SearchCardsQuery>response.data.searchCards;
   }
   OnCreateDeckListener: Observable<OnCreateDeckSubscription> = API.graphql(
     graphqlOperation(
